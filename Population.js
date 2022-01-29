@@ -37,7 +37,7 @@ class Population{
     }
 
     createMatingPool(){
-
+        this.matingPool = []; // reseting mating pool by clearing previous entries.
         // normalize fitness scores and create mating pool.
 
         let normalizationFactor = 0;
@@ -63,10 +63,12 @@ class Population{
 
     reproduce(){
         // create new child population.
+        // 2 parents create 2 children so
+        // we only pick N/2 pairs.
 
         let childList = [], index1, index2;
         
-        for (let i = 0; i < this.populationList.length; i++){
+        for (let i = 0; i < this.populationList.length/2; i++){
 
             index1 = Math.floor( Math.random() * this.matingPool.length );
             index2 = Math.floor( Math.random() * this.matingPool.length );
@@ -77,11 +79,12 @@ class Population{
             let p2 = this.matingPool[index2];
 
             childList.push(p1.crossover(p2));
-
+            childList.push(p2.crossover(p1));
         }
 
         this.populationList = childList;
         this.generations++;
+  
     }
 
     mutation(rate){
@@ -102,6 +105,7 @@ class Population{
     }
 
     displayDetails(){
+        this.calcFitness();
         if (this.globalbestfitness < this.bestobject.fitness){
 
             this.globalbestfitness = this.bestobject.fitness;
@@ -111,6 +115,7 @@ class Population{
             print('Generation #',this.generations);
             print('Avg fitness = ',this.averageFitness());
             print('Global best fitness = ',this.bestobject.fitness);
+            print('Total distance = ', 1/this.bestobject.fitness);
             print('Global best genes = ',this.bestobject.genes);
             
             

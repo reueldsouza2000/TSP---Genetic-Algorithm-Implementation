@@ -50,16 +50,16 @@ class DNA{
            
             for( let j = 0; j < partner.genes.length; j++){
 
-				let flag = 0;
-				for (let k = 0; k < childgenes.length; k++){
-					if (partner.genes[j] == childgenes[k]){
-						flag = 1;
-					}
-				}
+              let flag = 0;
+              for (let k = 0; k < childgenes.length; k++){
+                if (partner.genes[j] == childgenes[k]){
+                  flag = 1;
+                }
+              }
 
-				if (flag == 0){
-					childgenes.push(partner.genes[j]);
-				}
+              if (flag == 0){
+                childgenes.push(partner.genes[j]);
+              }
 
             }
 
@@ -68,8 +68,8 @@ class DNA{
         }      
 
 
-	  let child = new DNA(this.genes.length);
-	  child.genes = childgenes;
+	    let child = new DNA(this.genes.length);
+  	  child.genes = childgenes;
       return child;
     }
 
@@ -90,7 +90,5 @@ class DNA{
       }
       this.calcFitness();
   }
-
-    
 
 }
